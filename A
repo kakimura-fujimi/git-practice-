@@ -1,0 +1,33 @@
+# word_counter.py
+
+from collections import Counter
+import sys
+
+def count_words(text):
+    words = text.lower().split()
+    return Counter(words)
+
+def main():
+    if len(sys.argv) < 2:
+        print("Usage: python word_counter.py <filename>")
+        return
+
+    filename = sys.argv[1]
+
+    try:
+        with open(filename, "r", encoding="utf-8") as f:
+            text = f.read()
+
+        counts = count_words(text)
+
+        for word, count in counts.most_common(10):
+            print(f"{word}: {count}")
+
+    except FileNotFoundError:
+        print("File not found.")
+
+if __name__ == "__main__":
+    main()
+    
+
+    
